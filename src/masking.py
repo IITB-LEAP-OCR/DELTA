@@ -1,17 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[18]:
-
-
 import os
 import glob
 import cv2
 import tqdm
 import random
-
-
-# In[39]:
 
 
 def process_image(image):
@@ -29,7 +20,6 @@ def process_image(image):
     # Contours are drawn around white blobs. hierarchy variable contains info on the relationship between the contours
     contours, hierarchy = cv2.findContours(inverted_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-
     bboxes = []
     threshold = random.randint(80, 120) / 100
     print(threshold)
@@ -46,14 +36,8 @@ def process_image(image):
         w = int(b[2])
         h = int(b[3])
         cv2.rectangle(gray, (x,y), (x + w,y + h), (0, 0, 255), -1)
-        
-    #rgb_img = cv2.cvtColor(binary, cv2.COLOR_GRAY2RGB)
-        
+
     return gray
-
-
-# In[40]:
-
 
 def process_images(input_folder, output_folder):
     if not os.path.exists(output_folder):
@@ -73,23 +57,8 @@ def process_images(input_folder, output_folder):
         cv2.imwrite(os.path.join(output_folder, filename), processed_image)
 
 
-# In[44]:
-
-
 # Example usage
 input_folder = '/home/dhruv/Projects/TD-Dataset/Sample-EMBLEM/raw'
 output_folder = '/home/dhruv/Projects/TD-Dataset/Sample-EMBLEM/masked'
 process_images(input_folder, output_folder)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
